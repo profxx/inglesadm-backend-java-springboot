@@ -4,9 +4,19 @@ spring.datasource.password=Inglesadm@1
 
 spring.jpa.properties.hibernate.jdbc.time_zone=UTC
 
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
-
 spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 
+
+
+
+
+
+spring.datasource.url=${BD_URL}
+spring.datasource.username=${BD_USERNAME}
+spring.datasource.password=${BD_PASSWORD}
+
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
