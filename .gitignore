@@ -1,5 +1,6 @@
 HELP.md
 host.md
+xanxan.txt
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
