@@ -14,43 +14,39 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import br.com.dom.inglesadm_backend.model.User;
 
-
 @Service
 public class TokenService {
-    
+
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(User user){
+    public String generateToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
-                .withIssuer("auth-api")
-                .withSubject(user.getLogin()) 
-                .withExpiresAt(generateExpiringDate())
-                .sign(algorithm);
-            return token;
+            return JWT.create()
+                    .withIssuer("auth-api")
+                    .withSubject(user.getLogin())
+                    .withExpiresAt(generateExpiringDate())
+                    .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("Error while generating token.", e);
         }
     }
 
-    public String validateToken(String token){
+    public String validateToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                .withIssuer("auth-api")
-                .build()
-                .verify(token)
-                .getSubject();
-            
+                    .withIssuer("auth-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
         } catch (JWTVerificationException e) {
-            return "";
+            return null;
         }
-
     }
 
-    private Instant generateExpiringDate(){
+    private Instant generateExpiringDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
 }
